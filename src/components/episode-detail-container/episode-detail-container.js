@@ -4,7 +4,7 @@ import {
   EpisodeDescriptionStructure,
   EpisodeCardsContainerStructure,
 } from '../../structures/episode';
-import { getSeriesByID, getEpisodeByID } from '../../api/fetch';
+import { getSeriesByID, getEpisodeByID, getRecommendedEpisodes } from '../../api/fetch';
 import EpisodeWatch from './episode-watch/episode-watch';
 import EpisodeDescription from './episode-description/episode-description';
 import EpisodeCard from './episode-card/episode-card';
@@ -24,6 +24,7 @@ class EpisodeDetailContainer extends React.Component {
     this.state = {
       episode: {},
       serie: {},
+      recommended: null,
     };
   }
   state: {
@@ -38,6 +39,9 @@ class EpisodeDetailContainer extends React.Component {
     const serieId : number = 3;
     getSeriesByID(serieId)
     .then(this.changeState.bind(this, 'serie'))
+    .catch(EpisodeDetailContainer.throwError);
+    getRecommendedEpisodes()
+    .then(this.changeState.bind(this, 'recommended'))
     .catch(EpisodeDetailContainer.throwError);
   }
   props: {

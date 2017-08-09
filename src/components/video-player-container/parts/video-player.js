@@ -227,7 +227,6 @@ class VideoPlayer extends React.Component {
         break;
       case 8:
       case 461:
-      case 413:
       case 'Backspace':
         event.preventDefault();
         this.handleEventSource(event);
@@ -235,6 +234,9 @@ class VideoPlayer extends React.Component {
       case 415:
       case 19:
         this.handlePlayPause();
+        break;
+      case 413:
+        this.handlePause();
         break;
       case 412:
         this.handleRewind();
